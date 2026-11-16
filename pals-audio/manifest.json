@@ -1,0 +1,875 @@
+{
+  "voice": "th-TH-NiwatNeural",
+  "rate": "-10%",
+  "sequence": [
+    "domain",
+    "role",
+    "question",
+    "choice",
+    "feedback"
+  ],
+  "flows": [
+    {
+      "flowId": "arrest",
+      "flowTitle": "Pediatric Cardiac Arrest",
+      "nodes": [
+        {
+          "nodeId": "a1",
+          "domain": "Initial assessment",
+          "role": "Team Leader",
+          "question": "พบเด็กไม่ตอบสนอง ไม่หายใจปกติ และคลำชีพจรไม่ได้ คุณจะเริ่มจัดการอย่างไร?",
+          "branches": [
+            {
+              "id": "a1_a",
+              "choice": "เรียกทีม/ระบบฉุกเฉิน เริ่ม CPR คุณภาพสูง ช่วยหายใจด้วย BVM+O₂ และติด Monitor/Defibrillator",
+              "feedback": "เริ่มการช่วยชีวิตและเตรียมประเมิน Rhythm โดยไม่ชะลอ CPR",
+              "audioFile": "arrest_a1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a1_b",
+              "choice": "รอ ECG 12 leads ก่อน แล้วจึงเริ่ม CPR",
+              "feedback": "ไม่ควรชะลอการช่วยชีวิตเพื่อรอ ECG",
+              "audioFile": "arrest_a1_b.mp3",
+              "available": true
+            },
+            {
+              "id": "a1_c",
+              "choice": "ให้ยา Epinephrine ก่อน แล้วค่อยเริ่ม CPR",
+              "feedback": "การกดหน้าอกและการช่วยหายใจเป็นการดำเนินการเร่งด่วน",
+              "audioFile": "arrest_a1_c.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a2",
+          "domain": "Rhythm",
+          "role": "Team Leader",
+          "question": "เมื่อทีมพร้อมประเมิน Rhythm พบ VF/pVT คุณจัดอยู่ในกลุ่มใด?",
+          "branches": [
+            {
+              "id": "a2_a",
+              "choice": "Shockable rhythm",
+              "feedback": "VF/pVT เป็น shockable rhythm",
+              "audioFile": "arrest_a2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a2_b",
+              "choice": "Non-shockable rhythm",
+              "feedback": "VF/pVT เป็น shockable rhythm",
+              "audioFile": "arrest_a2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a3",
+          "domain": "Defibrillation",
+          "role": "AED Monitor / Defibrillator",
+          "question": "สำหรับ VF/pVT ขั้นตอนถัดไปตามแผนผังคือข้อใด?",
+          "branches": [
+            {
+              "id": "a3_a",
+              "choice": "ให้ Shock โดยเร็ว แล้วกลับไปทำ CPR ทันที 2 นาที",
+              "feedback": "AI Defib บันทึก Shock และ AI Compressor กลับไป CPR ทันที",
+              "audioFile": "arrest_a3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a3_b",
+              "choice": "ทำ CPR ต่อโดยไม่ช็อกจนกว่าจะครบ 2 นาที",
+              "feedback": "เมื่อเป็น shockable rhythm ให้ Shock โดยเร็ว",
+              "audioFile": "arrest_a3_b.mp3",
+              "available": true
+            },
+            {
+              "id": "a3_c",
+              "choice": "หยุด CPR เพื่อให้ยาและรอดูผลก่อน",
+              "feedback": "ไม่ควรชะลอการช็อกใน VF/pVT",
+              "audioFile": "arrest_a3_c.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a4",
+          "domain": "CPR cycle",
+          "role": "Compressor",
+          "question": "หลัง Shock ทีมควรดำเนินการอย่างไร?",
+          "branches": [
+            {
+              "id": "a4_a",
+              "choice": "เริ่ม CPR ต่อทันที 2 นาที และเตรียม IV/IO access",
+              "feedback": "AI Compressor เริ่ม CPR · AI IV/IO เตรียม access ตาม Scenario",
+              "audioFile": "arrest_a4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a4_b",
+              "choice": "หยุดรอ Monitor วิเคราะห์ทันทีหลัง Shock",
+              "feedback": "กลับไปทำ CPR ทันทีจนถึงจังหวะประเมิน Rhythm",
+              "audioFile": "arrest_a4_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a5",
+          "domain": "Reassessment",
+          "role": "Team Leader",
+          "question": "เมื่อครบ CPR 2 นาที ควรทำอะไรเป็นลำดับถัดไป?",
+          "branches": [
+            {
+              "id": "a5_a",
+              "choice": "หยุดกดหน้าอกช่วงสั้นที่สุดเพื่อประเมิน Rhythm และตัดสินใจตามผล",
+              "feedback": "AI Timer แจ้งครบ 2 นาที · บันทึก Rhythm check",
+              "audioFile": "arrest_a5_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a5_b",
+              "choice": "หยุด CPR และรอให้ชีพจรกลับมาเอง",
+              "feedback": "ต้องประเมิน Rhythm อย่างเป็นระบบและลดช่วงหยุดกดหน้าอก",
+              "audioFile": "arrest_a5_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a6",
+          "domain": "Rhythm",
+          "role": "Team Leader",
+          "question": "ผลการประเมินรอบนี้เป็น PEA/Asystole คุณจะจัดการอย่างไร?",
+          "branches": [
+            {
+              "id": "a6_a",
+              "choice": "กลับไป CPR 2 นาที ให้ Epinephrine โดยเร็วตามแนวทาง และค้นหา reversible causes",
+              "feedback": "AI Team บันทึก non-shockable pathway · CPR ต่อ · เตรียมประเมินสาเหตุ",
+              "audioFile": "arrest_a6_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a6_b",
+              "choice": "Shock ทันที",
+              "feedback": "PEA/Asystole เป็น non-shockable rhythm ไม่ให้ Shock",
+              "audioFile": "arrest_a6_b.mp3",
+              "available": true
+            },
+            {
+              "id": "a6_c",
+              "choice": "หยุด CPR เพื่อรอ ECG 12 leads",
+              "feedback": "ดำเนิน CPR ต่อและรักษาสาเหตุที่แก้ไขได้",
+              "audioFile": "arrest_a6_c.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a7",
+          "domain": "Reversible causes",
+          "role": "Team Leader",
+          "question": "ระหว่าง CPR คุณจะมอบหมายทีมค้นหาอะไร?",
+          "branches": [
+            {
+              "id": "a7_a",
+              "choice": "ค้นหาและรักษาสาเหตุที่แก้ไขได้ เช่น Hypovolemia, Hypoxia, Acidosis, Hypo/Hyperkalemia, Hypothermia, Tension pneumothorax, Tamponade, Toxins และ Thrombosis",
+              "feedback": "AI Team แบ่งงานค้นหา reversible causes และบันทึกใน Timeline",
+              "audioFile": "arrest_a7_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a7_b",
+              "choice": "มุ่งทำ Shock ซ้ำโดยไม่ประเมินสาเหตุ",
+              "feedback": "PEA/Asystole ไม่ใช่ shockable rhythm และต้องค้นหาสาเหตุ",
+              "audioFile": "arrest_a7_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a8",
+          "domain": "Outcome",
+          "role": "Team Leader",
+          "question": "หลังการประเมินพบชีพจรกลับมาและมีการไหลเวียนเลือด (ROSC) คุณจะทำอย่างไร?",
+          "branches": [
+            {
+              "id": "a8_a",
+              "choice": "เข้าสู่ Post-Cardiac Arrest Care และประเมิน ABC/hemodynamic อย่างใกล้ชิด",
+              "feedback": "AI Team เปลี่ยนสถานะเป็น ROSC และเปิด Post-Arrest checklist",
+              "audioFile": "arrest_a8_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a8_b",
+              "choice": "หยุดติดตาม Monitor และยุติการดูแลทันที",
+              "feedback": "หลัง ROSC ต้องดูแลต่อเนื่องและเฝ้าระวัง",
+              "audioFile": "arrest_a8_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "a9",
+          "domain": "Post-arrest",
+          "role": "Team Leader",
+          "question": "รายการใดควรอยู่ในการดูแลหลัง ROSC ตาม Checklist ที่แนบ?",
+          "branches": [
+            {
+              "id": "a9_a",
+              "choice": "ติดตาม ECG/ความดัน, perfusion, lactate/urine output, SpO₂/การระบาย CO₂, อุณหภูมิ, glucose และภาวะชัก",
+              "feedback": "AI Timer/Recorder สรุป Post-ROSC checklist",
+              "audioFile": "arrest_a9_a.mp3",
+              "available": true
+            },
+            {
+              "id": "a9_b",
+              "choice": "ติดตามเฉพาะอัตราการเต้นหัวใจ",
+              "feedback": "การดูแลหลัง ROSC ต้องครอบคลุมหลายระบบ",
+              "audioFile": "arrest_a9_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "bls1",
+      "flowTitle": "Pediatric BLS · Single Rescuer",
+      "nodes": [
+        {
+          "nodeId": "s1",
+          "domain": "Recognition",
+          "role": "Team Leader",
+          "question": "คุณเป็นผู้ช่วยเหลือเพียงคนเดียว พบเด็กไม่ตอบสนองและหายใจผิดปกติ ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "s1_a",
+              "choice": "ตรวจการหายใจ/ชีพจรพร้อมกันไม่เกิน 10 วินาที และประเมิน witnessed sudden collapse",
+              "feedback": "AI Timer บันทึกการประเมิน",
+              "audioFile": "bls1_s1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "s1_b",
+              "choice": "ออกจากผู้ป่วยทันทีเพื่อหาอุปกรณ์",
+              "feedback": "ประเมินอย่างรวดเร็วก่อนเลือกเส้นทาง",
+              "audioFile": "bls1_s1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "s2",
+          "domain": "Witnessed collapse",
+          "role": "Team Leader",
+          "question": "หากเป็น witnessed sudden collapse และยังไม่มีระบบฉุกเฉิน/AED ถูกเรียก คุณควรทำอย่างไรตามแผนผัง?",
+          "branches": [
+            {
+              "id": "s2_a",
+              "choice": "เปิดระบบฉุกเฉินและนำ AED/Defibrillator มาใช้โดยเร็ว",
+              "feedback": "AI Team บันทึกการเรียกช่วยเหลือและ AED",
+              "audioFile": "bls1_s2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "s2_b",
+              "choice": "ทำ CPR ต่อไปโดยไม่เรียกความช่วยเหลือเลย",
+              "feedback": "แผนผังให้ activate emergency response และ retrieve AED ใน witnessed collapse",
+              "audioFile": "bls1_s2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "s3",
+          "domain": "CPR ratio",
+          "role": "Compressor",
+          "question": "เมื่อเริ่ม CPR ในฐานะผู้ช่วยเหลือคนเดียว อัตราส่วนเริ่มต้นตามแผนผังคือเท่าใด?",
+          "branches": [
+            {
+              "id": "s3_a",
+              "choice": "30:2",
+              "feedback": "ใช้ 30:2 ใน single rescuer",
+              "audioFile": "bls1_s3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "s3_b",
+              "choice": "15:2",
+              "feedback": "15:2 เมื่อมีผู้ช่วยเหลือ 2 คนขึ้นไป",
+              "audioFile": "bls1_s3_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "s4",
+          "domain": "AED",
+          "role": "AED Monitor / Defibrillator",
+          "question": "เมื่อ AED พร้อมและวิเคราะห์ได้ shockable rhythm ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "s4_a",
+              "choice": "ให้ 1 shock แล้วกลับไป CPR ทันที 2 นาที",
+              "feedback": "AI Defib บันทึก Shock และ AI Compressor กลับไป CPR",
+              "audioFile": "bls1_s4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "s4_b",
+              "choice": "หยุด CPR เพื่อรอดูผลหลัง Shock",
+              "feedback": "กลับไป CPR ทันทีหลัง Shock",
+              "audioFile": "bls1_s4_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "s5",
+          "domain": "Handover",
+          "role": "Team Leader",
+          "question": "เมื่อมีผู้ช่วยเหลือคนที่สองมาถึง ควรปรับอัตราส่วน CPR เป็นเท่าใด?",
+          "branches": [
+            {
+              "id": "s5_a",
+              "choice": "15:2",
+              "feedback": "เมื่อมีผู้ช่วยเหลือ 2 คนขึ้นไป เปลี่ยนเป็น 15:2",
+              "audioFile": "bls1_s5_a.mp3",
+              "available": true
+            },
+            {
+              "id": "s5_b",
+              "choice": "คง 30:2 ตลอด",
+              "feedback": "เปลี่ยนตามจำนวนผู้ช่วยเหลือ",
+              "audioFile": "bls1_s5_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "bls2",
+      "flowTitle": "Pediatric BLS · Two or More Rescuers",
+      "nodes": [
+        {
+          "nodeId": "p1",
+          "domain": "Recognition",
+          "role": "Team Leader",
+          "question": "เมื่อพบเด็กไม่ตอบสนองและหายใจผิดปกติ ขั้นตอนประเมินชีพจรควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "p1_a",
+              "choice": "ตรวจการหายใจและชีพจรพร้อมกัน โดยใช้เวลาไม่เกิน 10 วินาที และเรียกทีม/ระบบฉุกเฉิน",
+              "feedback": "AI Timer เริ่มบันทึกเวลาประเมิน",
+              "audioFile": "bls2_p1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "p1_b",
+              "choice": "ใช้เวลาคลำชีพจรเกิน 30 วินาที",
+              "feedback": "การประเมินต้องรวดเร็ว ไม่เกิน 10 วินาที",
+              "audioFile": "bls2_p1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "p2",
+          "domain": "CPR",
+          "role": "Team Leader",
+          "question": "เมื่อยืนยันว่าไม่มีชีพจรหรือมีชีพจรแต่ HR <60/min ร่วมกับ poor perfusion แม้ให้ออกซิเจนและช่วยหายใจแล้ว ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "p2_a",
+              "choice": "เริ่ม CPR และมอบหมาย Compressor กับ Airway/BVM",
+              "feedback": "AI Compressor และ Airway เริ่มปฏิบัติหน้าที่",
+              "audioFile": "bls2_p2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "p2_b",
+              "choice": "รอ AED ก่อนเริ่ม CPR",
+              "feedback": "เริ่ม CPR โดยไม่รอ AED",
+              "audioFile": "bls2_p2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "p3",
+          "domain": "CPR ratio",
+          "role": "Compressor",
+          "question": "เมื่อมีผู้ช่วยเหลือ 2 คนขึ้นไป อัตราส่วน compression:ventilation สำหรับเด็กตามแผนผังคือเท่าใด?",
+          "branches": [
+            {
+              "id": "p3_a",
+              "choice": "15:2",
+              "feedback": "บันทึกอัตราส่วน 15:2 สำหรับ two or more rescuers",
+              "audioFile": "bls2_p3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "p3_b",
+              "choice": "30:2",
+              "feedback": "30:2 ใช้ในบริบทผู้ช่วยเหลือคนเดียว/ตามแผนผังที่กำหนด",
+              "audioFile": "bls2_p3_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "p4",
+          "domain": "Rhythm/AED",
+          "role": "AED Monitor / Defibrillator",
+          "question": "เมื่อ AED/Defibrillator พร้อมและแจ้งว่า shockable rhythm ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "p4_a",
+              "choice": "ให้ 1 shock แล้วกลับไป CPR ทันที 2 นาที จนกว่าเครื่องจะสั่งประเมิน Rhythm อีกครั้ง",
+              "feedback": "AI Defib บันทึก Shock · AI Compressor กลับไป CPR",
+              "audioFile": "bls2_p4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "p4_b",
+              "choice": "ช็อกแล้วหยุดรอชีพจรโดยไม่ทำ CPR",
+              "feedback": "หลัง Shock ให้กลับไป CPR ทันที",
+              "audioFile": "bls2_p4_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "p5",
+          "domain": "Rhythm/AED",
+          "role": "Team Leader",
+          "question": "หาก AED ระบุ non-shockable rhythm ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "p5_a",
+              "choice": "กลับไป CPR ทันที 2 นาที และดำเนินต่อจนทีม PALS รับช่วงหรือเด็กเริ่มขยับ",
+              "feedback": "AI Team ดำเนิน CPR ต่อ",
+              "audioFile": "bls2_p5_a.mp3",
+              "available": true
+            },
+            {
+              "id": "p5_b",
+              "choice": "กด Shock ซ้ำ",
+              "feedback": "Non-shockable rhythm ไม่ให้ Shock",
+              "audioFile": "bls2_p5_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "brady",
+      "flowTitle": "Bradycardia With Pulse",
+      "nodes": [
+        {
+          "nodeId": "b1",
+          "domain": "Assessment",
+          "role": "Team Leader",
+          "question": "เด็กมี Bradycardia และยังมีชีพจร สิ่งสำคัญที่ต้องประเมินเพื่อเลือกแนวทางคืออะไร?",
+          "branches": [
+            {
+              "id": "b1_a",
+              "choice": "มี cardiopulmonary compromise หรือไม่: altered mental status, signs of shock หรือ hypotension",
+              "feedback": "AI Monitor แสดงสัญญาณชีพเพื่อประเมิน perfusion",
+              "audioFile": "brady_b1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "b1_b",
+              "choice": "ดูเฉพาะตัวเลข HR โดยไม่ประเมิน perfusion",
+              "feedback": "ต้องประเมินภาวะ compromise ร่วมด้วย",
+              "audioFile": "brady_b1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "b2",
+          "domain": "Initial support",
+          "role": "Airway / BVM",
+          "question": "เมื่อพบ compromise คุณควรสั่งการสนับสนุนเบื้องต้นอย่างไร?",
+          "branches": [
+            {
+              "id": "b2_a",
+              "choice": "ดูแล airway ให้ออกซิเจน ช่วยหายใจด้วย positive pressure หากจำเป็น ติด cardiorespiratory monitor และติดตามชีพจร",
+              "feedback": "AI Airway/BVM ดำเนินการสนับสนุนตามคำสั่ง",
+              "audioFile": "brady_b2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "b2_b",
+              "choice": "รอ ECG โดยไม่ช่วยหายใจหรือให้ออกซิเจน",
+              "feedback": "ต้องเริ่ม assessment and support ก่อน",
+              "audioFile": "brady_b2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "b3",
+          "domain": "Reassessment",
+          "role": "Team Leader",
+          "question": "หลังให้การช่วยเหลือเบื้องต้น หาก Bradycardia ยังคงอยู่พร้อม cardiopulmonary compromise และ HR <60/min ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "b3_a",
+              "choice": "เริ่ม CPR พร้อมเปิด IV/IO access และพิจารณาการรักษาตามแผนผัง",
+              "feedback": "AI Compressor เริ่ม CPR · AI IV/IO เตรียม access",
+              "audioFile": "brady_b3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "b3_b",
+              "choice": "สังเกตต่อโดยไม่เริ่ม CPR",
+              "feedback": "แผนผังระบุเริ่ม CPR เมื่อ HR <60/min และมี compromise ต่อเนื่อง",
+              "audioFile": "brady_b3_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "b4",
+          "domain": "Medication/Pacing",
+          "role": "IV/IO/Medication",
+          "question": "ระหว่างดำเนินการ คุณควรเตรียม/พิจารณาสิ่งใดตามแผนผัง?",
+          "branches": [
+            {
+              "id": "b4_a",
+              "choice": "Epinephrine และพิจารณา Atropine เมื่อมี increased vagal tone หรือ primary AV block พร้อมค้นหา cause และพิจารณา pacing",
+              "feedback": "AI IV/IO บันทึกการเตรียมตาม Scenario · ไม่คำนวณขนาดยาในระบบนี้",
+              "audioFile": "brady_b4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "b4_b",
+              "choice": "ให้ Atropine เป็นกิจวัตรในเด็ก Bradycardia ทุกกรณี",
+              "feedback": "Atropine มีข้อบ่งชี้เฉพาะตามแผนผัง",
+              "audioFile": "brady_b4_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "b5",
+          "domain": "Reassessment",
+          "role": "Team Leader",
+          "question": "ระหว่าง CPR ควรประเมินชีพจรซ้ำเมื่อใดตามแผนผัง?",
+          "branches": [
+            {
+              "id": "b5_a",
+              "choice": "ประเมินชีพจรทุก 2 นาที และหากยังไม่มีชีพจรให้เข้าสู่ Pediatric Cardiac Arrest Algorithm",
+              "feedback": "AI Timer บันทึกรอบประเมิน",
+              "audioFile": "brady_b5_a.mp3",
+              "available": true
+            },
+            {
+              "id": "b5_b",
+              "choice": "ประเมินทุก 10 นาที",
+              "feedback": "แผนผังระบุประเมินชีพจรทุก 2 นาที",
+              "audioFile": "brady_b5_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "fbao",
+      "flowTitle": "Foreign-Body Airway Obstruction",
+      "nodes": [
+        {
+          "nodeId": "f1",
+          "domain": "Recognition",
+          "role": "Team Leader",
+          "question": "เด็กมีอาการสงสัย Foreign-Body Airway Obstruction คุณควรประเมินอะไร?",
+          "branches": [
+            {
+              "id": "f1_a",
+              "choice": "ประเมิน severe FBAO: ไออ่อน/ไม่มีแรงไอ พูดหรือร้องไม่ได้ เขียว ซึม หรือ apnea",
+              "feedback": "AI Airway ประเมินความรุนแรงและอายุผู้ป่วย",
+              "audioFile": "fbao_f1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "f1_b",
+              "choice": "สังเกตเฉพาะว่ามีไข้หรือไม่",
+              "feedback": "ต้องประเมินการอุดกั้นทางเดินหายใจและความรุนแรง",
+              "audioFile": "fbao_f1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "f2",
+          "domain": "Age group",
+          "role": "Team Leader",
+          "question": "ผู้ป่วยเป็น Infant (<1 ปี) และมี severe FBAO ควรเลือกการช่วยเหลือใด?",
+          "branches": [
+            {
+              "id": "f2_a",
+              "choice": "ทำ 5 back blows สลับ 5 chest thrusts และทำซ้ำจนสิ่งแปลกปลอมหลุดหรือไม่ตอบสนอง",
+              "feedback": "AI Airway บันทึกชุด back blows/chest thrusts",
+              "audioFile": "fbao_f2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "f2_b",
+              "choice": "ทำ abdominal thrusts",
+              "feedback": "Infant ใช้ back blows และ chest thrusts ไม่ใช้ abdominal thrusts",
+              "audioFile": "fbao_f2_b.mp3",
+              "available": true
+            },
+            {
+              "id": "f2_c",
+              "choice": "กวาดนิ้วในปากโดยมองไม่เห็นสิ่งแปลกปลอม",
+              "feedback": "ไม่ทำ blind finger sweep",
+              "audioFile": "fbao_f2_c.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "f3",
+          "domain": "Unresponsive",
+          "role": "Team Leader",
+          "question": "หากผู้ป่วยไม่ตอบสนอง ควรดำเนินการอย่างไร?",
+          "branches": [
+            {
+              "id": "f3_a",
+              "choice": "เริ่ม CPR โดยเริ่มจาก chest compressions และตรวจดูสิ่งแปลกปลอมที่มองเห็นได้ก่อนช่วยหายใจ",
+              "feedback": "AI Team เปลี่ยนเป็น CPR pathway",
+              "audioFile": "fbao_f3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "f3_b",
+              "choice": "ทำ abdominal thrusts ต่อในผู้ป่วยหมดสติ",
+              "feedback": "เมื่อไม่ตอบสนองให้เริ่ม CPR",
+              "audioFile": "fbao_f3_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "postrosc",
+      "flowTitle": "Post-Cardiac Arrest Care",
+      "nodes": [
+        {
+          "nodeId": "r1",
+          "domain": "Hemodynamic",
+          "role": "Team Leader",
+          "question": "หลัง ROSC เป้าหมาย hemodynamic ตาม checklist ที่แนบคือข้อใด?",
+          "branches": [
+            {
+              "id": "r1_a",
+              "choice": "ติดตาม cardiac telemetry/arterial BP และคง SBP กับ MAP มากกว่า 10th percentile",
+              "feedback": "AI Monitor บันทึก hemodynamic monitoring",
+              "audioFile": "postrosc_r1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "r1_b",
+              "choice": "ไม่ต้องติดตามความดันเมื่อมีชีพจรแล้ว",
+              "feedback": "หลัง ROSC ต้องติดตาม hemodynamic อย่างใกล้ชิด",
+              "audioFile": "postrosc_r1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "r2",
+          "domain": "Respiratory",
+          "role": "Airway / BVM",
+          "question": "การติดตามระบบหายใจตาม checklist คือข้อใด?",
+          "branches": [
+            {
+              "id": "r2_a",
+              "choice": "ติดตาม SpO₂ โดยตั้งเป้าตาม checklist 94–99% และปรับ ventilation ให้เหมาะกับภาวะผู้ป่วย",
+              "feedback": "AI Airway บันทึก oxygenation/ventilation targets",
+              "audioFile": "postrosc_r2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "r2_b",
+              "choice": "ให้ออกซิเจน 100% ต่อเนื่องโดยไม่ติดตามค่า",
+              "feedback": "ควรติดตามและปรับเป้าหมายตามสภาพผู้ป่วย",
+              "audioFile": "postrosc_r2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "r3",
+          "domain": "Neurologic",
+          "role": "Team Leader",
+          "question": "หากผู้ป่วยมี persistent encephalopathy ควรพิจารณาอะไร?",
+          "branches": [
+            {
+              "id": "r3_a",
+              "choice": "continuous EEG และประเมิน/รักษา seizure",
+              "feedback": "AI Team บันทึก neurologic monitoring",
+              "audioFile": "postrosc_r3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "r3_b",
+              "choice": "ไม่ต้องประเมิน seizure หากไม่เห็นอาการชัก",
+              "feedback": "อาจมี seizure ที่ไม่แสดงอาการชัดเจน",
+              "audioFile": "postrosc_r3_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "r4",
+          "domain": "Temperature/Metabolic",
+          "role": "Team Leader",
+          "question": "รายการดูแลเพิ่มเติมหลัง ROSC ตาม checklist ประกอบด้วยข้อใด?",
+          "branches": [
+            {
+              "id": "r4_a",
+              "choice": "ติดตาม core temperature ป้องกัน/รักษาไข้, glucose, electrolytes, pain/agitation และชะลอ prognostication อย่างน้อย 72 ชั่วโมงตามบริบท",
+              "feedback": "AI Timer/Recorder สรุป checklist ครบหลายระบบ",
+              "audioFile": "postrosc_r4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "r4_b",
+              "choice": "ประเมิน neurologic prognosis ทันทีหลัง ROSC",
+              "feedback": "Checklist ระบุให้ delay prognostication อย่างน้อย 72 ชั่วโมงและใช้หลาย modalities",
+              "audioFile": "postrosc_r4_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "flowId": "tachy",
+      "flowTitle": "Tachycardia With Pulse",
+      "nodes": [
+        {
+          "nodeId": "t1",
+          "domain": "Initial assessment",
+          "role": "Team Leader",
+          "question": "เด็กสงสัย Tachyarrhythmia และมีชีพจร ขั้นแรกควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "t1_a",
+              "choice": "ประเมิน airway/breathing, ให้ออกซิเจนหรือช่วยหายใจตามจำเป็น, ติด cardiorespiratory monitor, เปิด IV/IO และทำ 12-lead ECG หากทำได้โดยไม่ชะลอการรักษา",
+              "feedback": "AI Team เตรียม monitor และ access",
+              "audioFile": "tachy_t1_a.mp3",
+              "available": true
+            },
+            {
+              "id": "t1_b",
+              "choice": "ให้ antiarrhythmic ทันทีโดยไม่ประเมิน rhythm",
+              "feedback": "ต้องประเมินและจำแนก rhythm ก่อน",
+              "audioFile": "tachy_t1_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "t2",
+          "domain": "Rhythm",
+          "role": "Team Leader",
+          "question": "ลักษณะ P wave ปกติและ RR interval แปรผัน ร่วมกับอัตราการเต้นที่เหมาะสมกับวัย สนับสนุนภาวะใด?",
+          "branches": [
+            {
+              "id": "t2_a",
+              "choice": "Probable sinus tachycardia ให้ค้นหาและรักษาสาเหตุ",
+              "feedback": "AI Monitor แสดง sinus rhythm · ทีมค้นหาสาเหตุ",
+              "audioFile": "tachy_t2_a.mp3",
+              "available": true
+            },
+            {
+              "id": "t2_b",
+              "choice": "Probable SVT ทุกราย",
+              "feedback": "ต้องพิจารณา P wave, RR interval และอัตราตามวัย",
+              "audioFile": "tachy_t2_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "t3",
+          "domain": "Stability",
+          "role": "Team Leader",
+          "question": "ถ้าประเมินแล้วมี cardiopulmonary compromise เช่น altered mental status, shock หรือ hypotension ควรทำอย่างไร?",
+          "branches": [
+            {
+              "id": "t3_a",
+              "choice": "ประเมิน QRS duration และเตรียมแนวทางรักษาเร่งด่วนตามความกว้าง QRS/สภาพผู้ป่วย",
+              "feedback": "AI Team แจ้งสถานะ unstable และเตรียม escalation",
+              "audioFile": "tachy_t3_a.mp3",
+              "available": true
+            },
+            {
+              "id": "t3_b",
+              "choice": "เฝ้าสังเกตอย่างเดียว",
+              "feedback": "ภาวะ compromise ต้องได้รับการจัดการเร่งด่วน",
+              "audioFile": "tachy_t3_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "t4",
+          "domain": "QRS",
+          "role": "Team Leader",
+          "question": "เมื่อเป็น tachycardia ที่มี compromise และ QRS กว้าง (>0.09 sec) ควรเลือกแนวทางใดตามแผนผัง?",
+          "branches": [
+            {
+              "id": "t4_a",
+              "choice": "พิจารณา synchronized cardioversion และขอ expert consultation",
+              "feedback": "AI Defib เตรียม synchronized cardioversion ตาม Scenario",
+              "audioFile": "tachy_t4_a.mp3",
+              "available": true
+            },
+            {
+              "id": "t4_b",
+              "choice": "ให้ vagal maneuver เป็นขั้นตอนหลัก",
+              "feedback": "Wide QRS ร่วมกับ compromise ต้องประเมิน ventricular tachycardia/aberrancy",
+              "audioFile": "tachy_t4_b.mp3",
+              "available": true
+            }
+          ]
+        },
+        {
+          "nodeId": "t5",
+          "domain": "Stable pathway",
+          "role": "Team Leader",
+          "question": "หากไม่มี cardiopulmonary compromise และ QRS แคบ (≤0.09 sec) แนวทางที่แผนผังให้พิจารณาคืออะไร?",
+          "branches": [
+            {
+              "id": "t5_a",
+              "choice": "พิจารณา vagal maneuvers และให้ adenosine IV/IO ตามแผนผัง พร้อม expert consultation ตามความเหมาะสม",
+              "feedback": "AI Team บันทึก stable narrow-complex pathway",
+              "audioFile": "tachy_t5_a.mp3",
+              "available": true
+            },
+            {
+              "id": "t5_b",
+              "choice": "ให้ unsynchronized shock ทุกราย",
+              "feedback": "ไม่ใช่แนวทางสำหรับ stable narrow-complex tachycardia",
+              "audioFile": "tachy_t5_b.mp3",
+              "available": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
