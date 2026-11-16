@@ -1,0 +1,71 @@
+{
+  "flow": "arrest",
+  "voice": {
+    "name": "Kittisak - Authoritative & Composed",
+    "language": "th-TH",
+    "gender": "male"
+  },
+  "format": {
+    "encoding": "mp3",
+    "sampleRateHz": 44100,
+    "channels": 1,
+    "bitrateBps": 128000
+  },
+  "files": [
+    {
+      "node": "a1",
+      "file": "a1.mp3",
+      "durationSeconds": 18.2414,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=7aff4340a3094178a0b3e5c9c915b9cb.mp3"
+    },
+    {
+      "node": "a2",
+      "file": "a2.mp3",
+      "durationSeconds": 12.6222,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=9145e6d3be30497c90b0420b18256195.mp3"
+    },
+    {
+      "node": "a3",
+      "file": "a3.mp3",
+      "durationSeconds": 9.3315,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=b48794329f3b4efa9f20a7c855e7b1bb.mp3"
+    },
+    {
+      "node": "a4",
+      "file": "a4.mp3",
+      "durationSeconds": 11.9024,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=e51eb189be8b4593bcff85322c9e9af0.mp3"
+    },
+    {
+      "node": "a5",
+      "file": "a5.mp3",
+      "durationSeconds": 9.4592,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=7cd6c79ff9074f27921870f50f3be393.mp3"
+    },
+    {
+      "node": "a6",
+      "file": "a6.mp3",
+      "durationSeconds": 12.8196,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=33cfe41d617d49a2aea916f570b1e262.mp3"
+    },
+    {
+      "node": "a7",
+      "file": "a7.mp3",
+      "durationSeconds": 17.4287,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=324d3391bc0140d5a023f1d4daf3812f.mp3"
+    },
+    {
+      "node": "a8",
+      "file": "a8.mp3",
+      "durationSeconds": 16.0704,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=6000fece4e7f444aa1bb19d7885ce374.mp3"
+    },
+    {
+      "node": "a9",
+      "file": "a9.mp3",
+      "durationSeconds": 14.7468,
+      "url": "https://resource2.heygen.ai/text_to_speech/bc417335b2d246ce8f372e57d6d0cfce/5c8e2ed80ff94d47b12de0c6fc02d9a0/id=5d2ebff28870491988ea2bcddaa6c982.mp3"
+    }
+  ],
+  "note": "Generated audio URLs hosted by HeyGen. MP3 binaries have not yet been committed to this repository."
+}
